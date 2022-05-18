@@ -11,7 +11,7 @@ function CreateToDo() {
         handleSubmit,
         setValue,
         formState: { errors },
-    } = useForm();
+    } = useForm<IForm>();
     const handleValid = ({ toDo }: IForm) => {
         setToDos((oldToDos) => [
             { text: toDo, id: Date.now(), category: "TO_DO" },

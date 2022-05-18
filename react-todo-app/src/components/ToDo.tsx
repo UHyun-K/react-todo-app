@@ -1,14 +1,13 @@
-import { toDoState } from "../atoms";
-import { useRecoilValue } from "recoil";
+import { IToDo } from "../atoms";
 
-function ToDo() {
-    const toDos = useRecoilValue(toDoState);
+function ToDo({ text }: IToDo) {
     return (
-        <ul>
-            {toDos.map((toDo) => (
-                <li key={toDo.id}>{toDo.text}</li>
-            ))}
-        </ul>
+        <li>
+            <span>{text}</span>
+            <button>ToDo</button>
+            <button>Doing</button>
+            <button>Done</button>
+        </li>
     );
 }
 export default ToDo;
