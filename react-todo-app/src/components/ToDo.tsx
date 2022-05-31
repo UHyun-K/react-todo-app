@@ -1,3 +1,4 @@
+import React from "react";
 import { useSetRecoilState } from "recoil";
 import { IToDo, toDoState, Categories } from "../atoms";
 
@@ -7,11 +8,12 @@ function ToDo({ text, category, id }: IToDo) {
         const {
             currentTarget: { name },
         } = event;
+
         setToDos((oldToDos) => {
             const targetIndex = oldToDos.findIndex((toDo) => toDo.id === id);
             const oldToDo = oldToDos[targetIndex];
             const newToDo = { text, id, category: name as any };
-            console.log(oldToDo, newToDo);
+
             return [
                 ...oldToDos.slice(0, targetIndex),
                 newToDo,
@@ -19,6 +21,17 @@ function ToDo({ text, category, id }: IToDo) {
             ];
         });
     };
+
+    const onDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setToDos((oldToDos) => {
+            const targetindex = oldToDos.findIndex((todo) => todo.id === id);
+            return [
+                ...oldToDos.slice(0, targetindex),
+                ...oldToDos.slice(targetindex + 1),
+            ];
+        });
+    };
+
     return (
         <li>
             <span>{text}</span>
@@ -37,6 +50,9 @@ function ToDo({ text, category, id }: IToDo) {
                     DONE
                 </button>
             )}
+            <button onClick={onDelete} name={Categories.DELETE}>
+                ❌
+            </button>
         </li>
     );
 }
