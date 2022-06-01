@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import ToDoList from "./components/ToDoList";
+import ToDoHead from "./components/ToDoHead";
+import ToDoTemplate from "./components/ToDoTemplate";
 
 const GlobalStyle = createGlobalStyle`@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
 html, body, div, span, applet, object, iframe,
@@ -58,6 +60,10 @@ body {
   background-color:${(props) => props.theme.bgColor};
   color:${(props) => props.theme.textColor};
   line-height: 1.2;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
 }
 a {
   text-decoration:none;
@@ -69,7 +75,10 @@ function App() {
     return (
         <>
             <GlobalStyle />
-            <ToDoList />
+            <ToDoTemplate>
+                <ToDoHead />
+                <ToDoList />
+            </ToDoTemplate>
         </>
     );
 }
