@@ -1,6 +1,39 @@
 import React from "react";
-import { useSetRecoilState } from "recoil";
-import { IToDo, toDoState, Categories } from "../atoms";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { IToDo, toDoState, Categories, categoryState } from "../atoms";
+import styled, { css } from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faCircleCheck,
+    faCircle,
+    faArrowAltCircleLeft,
+    faTrashCan,
+} from "@fortawesome/free-regular-svg-icons";
+
+const List = styled.li`
+    width: 100%;
+    position: relative;
+    padding: 10px 10px 10px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    :hover {
+        background: rgba(0, 0, 0, 0.1);
+    }
+    span {
+        font-size: 15px;
+        font-weight: bold;
+    }
+`;
+
+const Btns = styled.button`
+    margin: 0 5px;
+    font-size: 20px;
+`;
+const lastIcon = {
+    color: "red",
+};
 
 function ToDo({ text, category, id }: IToDo) {
     const setToDos = useSetRecoilState(toDoState);
@@ -33,27 +66,29 @@ function ToDo({ text, category, id }: IToDo) {
     };
 
     return (
-        <li>
+        <List>
             <span>{text}</span>
-            {category !== Categories.DOING && (
-                <button name={Categories.DOING} onClick={onClick}>
-                    DOING
-                </button>
-            )}
-            {category !== Categories.TO_DO && (
-                <button name={Categories.TO_DO} onClick={onClick}>
-                    TO_DO
-                </button>
-            )}
-            {category !== Categories.DONE && (
-                <button name={Categories.DONE} onClick={onClick}>
-                    DONE
-                </button>
-            )}
-            <button onClick={onDelete} name={Categories.DELETE}>
-                ❌
-            </button>
-        </li>
+            <div>
+                {category !== Categories.DOING && (
+                    <Btns name={Categories.DOING} onClick={onClick}>
+                        <FontAwesomeIcon icon={faArrowAltCircleLeft} />
+                    </Btns>
+                )}
+                {category !== Categories.TO_DO && (
+                    <Btns name={Categories.TO_DO} onClick={onClick}>
+                        <FontAwesomeIcon icon={faCircle} />
+                    </Btns>
+                )}
+                {category !== Categories.DONE && (
+                    <Btns name={Categories.DONE} onClick={onClick}>
+                        <FontAwesomeIcon icon={faCircleCheck} />
+                    </Btns>
+                )}
+                <Btns onClick={onDelete} name={Categories.DELETE}>
+                    <FontAwesomeIcon style={lastIcon} icon={faTrashCan} />
+                </Btns>
+            </div>
+        </List>
     );
 }
 

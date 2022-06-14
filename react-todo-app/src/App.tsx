@@ -36,7 +36,7 @@ footer, header, hgroup, main, menu, nav, section {
 body {
   line-height: 1;
 }
-menu, ol, ul {
+menu, ol, ul , li{
   list-style: none;
 }
 blockquote, q {
@@ -69,6 +69,9 @@ a {
   text-decoration:none;
   color:inherit;
 }
+
+button{
+background: inherit ; border:none; box-shadow:none; border-radius:0; padding:0; overflow:visible; cursor:pointer} 
 `;
 
 function App() {

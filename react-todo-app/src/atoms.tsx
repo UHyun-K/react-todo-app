@@ -6,14 +6,7 @@ export enum Categories {
     "DOING" = "DOING",
     "DONE" = "DONE",
     "DELETE" = "DELETE",
-}
-
-type categories = "TO_DO" | "DOING" | "DONE";
-
-export interface IToDo {
-    text: string;
-    id: number;
-    category: Categories;
+    "CUSTOM" = "CUSTOM",
 }
 
 export const categoryState = atom<Categories>({
@@ -21,11 +14,24 @@ export const categoryState = atom<Categories>({
     default: Categories.TO_DO,
 });
 
+export interface ICustom {
+    category: string;
+    key: number;
+}
+export const customState = atom<ICustom[]>({
+    key: "newCategory",
+    default: [],
+});
 const { persistAtom } = recoilPersist({
     key: "todoLocal",
     storage: localStorage,
 });
 
+export interface IToDo {
+    text: string;
+    id: number;
+    category: Categories;
+}
 export const toDoState = atom<IToDo[]>({
     key: "toDo",
     default: [],

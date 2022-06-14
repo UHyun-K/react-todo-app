@@ -9,6 +9,11 @@ const ToDoTemplateBlock = styled.div`
     height: 600px;
     max-height: 1400px;
     background: #fff;
+
+    padding-top: 48px;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-bottom: 24px;
 `;
 interface GlobalLayoutProps {
     children: ReactNode;
